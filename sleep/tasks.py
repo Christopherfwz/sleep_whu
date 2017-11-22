@@ -19,22 +19,30 @@ def checkWhetherSleep():
         isSleepTime = (now>=start_time) and (now<=end_time)
         isSleeping = user.status
         if isSleepTime:
-            result.append(sleep(user.id,user.password))
+            result.append(sleep(user))
         else:
             if isSleeping:
-                result.append(resume(user.id, user.password))
+                result.append(resume(user))
             else:
                 pass
     print result
 
-def sleep(id,password):
+def sleep(user):
+    id = user.id
+    password = user.password
     sleep = Sleep(id, password)
     # choice between "resume" and "stop"
     status = sleep.keep("stop")
-    return {id,'SLEEPING',status}
+    if status:
+        user.isSleeping = True
+    return {'id':id,'status':'SLEEPING','result':status}
 
-def resume(id,password):
+def resume(user):
+    id = user.id
+    password = user.password
     sleep = Sleep(id, password)
     # choice between "resume" and "stop"
     status = sleep.keep("resume")
-    return {id,'USING',status}
+    if status:
+        user.isSleeping = False
+    return {'id':id,'status':'USING','result':status}
