@@ -35,6 +35,7 @@ def sleep(user):
     status = sleep.keep("stop")
     if status:
         user.isSleeping = True
+        user.save()
     return {'id':id,'status':'SLEEPING','result':status}
 
 def resume(user):
@@ -45,4 +46,5 @@ def resume(user):
     status = sleep.keep("resume")
     if status:
         user.isSleeping = False
+        user.save()
     return {'id':id,'status':'USING','result':status}
