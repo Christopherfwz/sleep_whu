@@ -9,5 +9,10 @@ class SleepUser(models.Model):
     password = models.CharField(verbose_name='密码',max_length=30)
     startTime = models.TimeField(verbose_name='睡觉开始时间')
     endTime = models.TimeField(verbose_name='睡觉结束时间')
+    status = models.BooleanField(verbose_name='是否正在睡觉',default=False)
     def __unicode__(self):
-        return u"%s ===> %s-%s" % (self.id,self.startTime,self.endTime)
+        if self.status:
+            status = 'SLEEPING'
+        else:
+            status = 'USING'
+        return u"%s ===> %s-%s (%s)" % (self.id,self.startTime,self.endTime,status)
