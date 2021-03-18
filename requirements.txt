@@ -11,7 +11,7 @@ idna==2.6
 kombu==3.0.37
 lxml==4.1.1
 olefile==0.44
-Pillow==4.3.0
+Pillow==8.1.1
 pytesseract==0.1.7
 pytz==2017.3
 redis==2.10.6
